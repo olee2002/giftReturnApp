@@ -1,0 +1,27 @@
+{
+  "name": "ls",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "hbs": "^4.0.1",
+    "method-override": "^2.3.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olee2002/giftReturnApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olee2002/giftReturnApp/issues"
+  },
+  "homepage": "https://github.com/olee2002/giftReturnApp#readme",
+  "keywords": []
+}

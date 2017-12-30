@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router({ mergeParams: true })
 //require database
 const User = require('../db/models/User')
+const Store = require('../db/models/Store')
 //store index page
 router.get('/', (req, res) => {
     const userId = req.params.userId
@@ -34,7 +35,7 @@ router.get('/:storeId', (req, res) => {
 
     User.findById(userId)
         .then((user) => {
-            const store = user.stores.id(storeId)
+            const store = user.stores.storeId
             res.render('stores/show', {
                 userId,
                 store,
@@ -48,16 +49,10 @@ router.get('/:storeId', (req, res) => {
 //post new store page
 router.post('/', (req, res) => {
     const userId = req.params.userId
-    //const newStore = req.body
-    
+
     User.findById(userId)
         .then((user) => {
-            if (Array.isArray(user.stores)) {
-                user.stores.push(req.body);
-            } else {
-                user.stores = [req.body];
-            }
-            
+            user.stores.push(req.body);
             return user.save()
         })
         .then(() => {

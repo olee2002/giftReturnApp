@@ -37,6 +37,18 @@
         <input class="button primary" type="submit" value="Update Profile">
         <a href="/users/{{user._id}}" class="button warning">Cancel</a>
       </div>
+      <script language="javascript">
+        function UpdateConfirm() {
+          var userPreference;
+          if (confirm("Do you want to save changes?") == true) {
+            return true;
+          }
+          else {
+            return false;
+          }
+
+        }
+      </script>
     </form>
   </div>
 </div>

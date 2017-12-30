@@ -50,39 +50,41 @@ router.get('/:userId', (req, res) => {
 
 })
 //edit route
-router.get('/:userId/edit',(req,res)=>{
-    const userId =req.params.userId
+router.get('/:userId/edit', (req, res) => {
+    const userId = req.params.userId
     User.findById(userId)
-    .then((user)=>{
-        res.render('users/edit',{
-            user,
-            pageTitle:'Profile_Update'
+        .then((user) => {
+            res.render('users/edit', {
+                user,
+                pageTitle: 'Profile_Update'
+            })
+            req.flash("msg", "Data updated successfully");
+            res.locals.messages = req.flash();
         })
-        //req.flash("msg","Error Occurred")
-    })
-    .catch((error)=>{
-        console.log(error)
-    })
+        .catch((error) => {
+            console.log(error)
+        })
 })
 //put route
-router.put('/:userId',(req,res)=>{
-    const userId =req.params.userId
+router.put('/:userId', (req, res) => {
+    const userId = req.params.userId
     const updatedUserInfo = req.body
-    User.findByIdAndUpdate(userId, updatedUserInfo,{new:true})
-    .then(()=>{
-        res.redirect(`/users/${userId}`)
-    })
+    User.findByIdAndUpdate(userId, updatedUserInfo, { new: true })
+        .then(() => {
+            res.redirect(`/users/${userId}`)
+        })
 })
 
 //delete route
 
-router.get('/:userId/delete',(req,res)=>{
-   // req.flash('delete_msg', 'You are about to delete this page!');
-    const userId=req.params.userId
+router.get('/:userId/delete', (req, res) => {
+    // req.flash('delete_msg', 'You are about to delete this page!');
+    // res.redirect(`users/login`)
+    const userId = req.params.userId
     User.findByIdAndRemove(userId)
-    .then(()=>{
-        res.redirect(`/users`)
-    })
+        .then(() => {
+            res.redirect(`/users`)
+        })
 })
 
 

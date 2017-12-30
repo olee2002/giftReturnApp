@@ -26,12 +26,12 @@ const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 //hbs
 app.set('view engine', 'hbs')
-// //cookie-parser
-// const cookieParser = require('cookie-parser')
-// app.use(cookieParser())
-// //connect-flash
-// const flash = require('connect-flash')
-// app.use(flash())
+//cookie-parser
+const cookieParser = require('cookie-parser')
+app.use(cookieParser())
+//connect-flash
+const flash = require('connect-flash')
+app.use(flash())
 //public folder
 app.use(express.static(`${__dirname}/public`))
 //controllers

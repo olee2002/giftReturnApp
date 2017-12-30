@@ -4,7 +4,7 @@ const Gift = require('../models/Gift')
 const mongoose = require('mongoose')
 
 //connect to database
-mongoose.connect('mongodb://localhost/gift-returns', {
+mongoose.connect('mongodb://localhost/gift-returns-olee', {
     useMongoClient: true
 })
 

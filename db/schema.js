@@ -54,7 +54,10 @@ const UserSchema = new Schema(
             type: String,
             required: [true, 'First name is required!']
         },
-
+        lastName:{
+            type: String,
+            required: [true, 'First name is required!']
+        },
         photoUrl:{
             type: String,
             default: 'http://www.fillmurray.com/300/300'

@@ -39,7 +39,7 @@ const userController = require('./controllers/userController')
 app.use('/users', userController)
 const storeController = require('./controllers/storeController')
 app.use('/users/:userId/stores', storeController)
-//test PORT setup
+//Redirect the main port to user page.
 app.get('/', (req, res) => {
     res.redirect('/users')
 })

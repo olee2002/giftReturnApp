@@ -35,11 +35,13 @@ app.use(flash())
 //public folder
 app.use(express.static(`${__dirname}/public`))
 //controllers
-const Controller = require('./controllers/userController')
-app.use('/users', Controller)
+const userController = require('./controllers/userController')
+app.use('/users', userController)
+const storeController = require('./controllers/storeController')
+app.use('/users/:userId/stores', storeController)
 //test PORT setup
 app.get('/', (req, res) => {
-    res.send('Hello World')
+    res.redirect('/users')
 })
 
 

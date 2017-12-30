@@ -48,12 +48,15 @@ router.get('/:storeId', (req, res) => {
 //post new store page
 router.post('/', (req, res) => {
     const userId = req.params.userId
-    const newStore = req.body
-
+    //const newStore = req.body
+    
     User.findById(userId)
         .then((user) => {
-            console.log(user.store)
-            user.stores.push(newStore)
+            if (Array.isArray(user.stores)) {
+                user.stores.push(req.body);
+            } else {
+                user.stores = [req.body];
+            }
             
             return user.save()
         })

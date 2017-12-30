@@ -58,8 +58,6 @@ router.get('/:userId/edit', (req, res) => {
                 user,
                 pageTitle: 'Profile_Update'
             })
-            req.flash("msg", "Data updated successfully");
-            res.locals.messages = req.flash();
         })
         .catch((error) => {
             console.log(error)
@@ -78,8 +76,6 @@ router.put('/:userId', (req, res) => {
 //delete route
 
 router.get('/:userId/delete', (req, res) => {
-    // req.flash('delete_msg', 'You are about to delete this page!');
-    // res.redirect(`users/login`)
     const userId = req.params.userId
     User.findByIdAndRemove(userId)
         .then(() => {

@@ -7,7 +7,7 @@ const GiftSchema = new Schema(
     {
         title: {
             type: String,
-            required: [true,'Gift title is required!']
+            required: true
         },
         description: {
             type: String
@@ -20,43 +20,40 @@ const GiftSchema = new Schema(
         }
 
     },
-    {
-        timestamps:{}
-    }
+    {usePushEach: true}
 )
 
 const StoreSchema = new Schema(
     {
         name: {
             type: String,
-            required:[true,'Store name is required!']
+            required:true
         },
         address: {
             type: String
         },
         giftstoReturn: [GiftSchema]
     },
-    {
-        timestamps:{}
-    }
+    
+    {usePushEach: true}
 )
 
 const UserSchema = new Schema(
     {
         username:{
             type:String,
-            required: [true, 'Username is required']
+            required: true
         },
         email: {
             type:String
         },
         firstName:{
             type: String,
-            required: [true, 'First name is required!']
+            required: true
         },
         lastName:{
             type: String,
-            required: [true, 'First name is required!']
+            required: true
         },
         photoUrl:{
             type: String,
@@ -64,9 +61,7 @@ const UserSchema = new Schema(
         },
         
     },
-    {
-        timestamps:{}
-    }
+    {usePushEach: true}
 
 )
 

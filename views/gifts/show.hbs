@@ -1,0 +1,21 @@
+<div class="stepper">
+    <a href="/users">Home</a>|
+    <a href="/users/{{userId}}">Profile</a>|
+    <a href="/users/{{userId}}/stores">Stores</a> |
+    <a href="/users/{{userId}}/stores/{{store._id}}">{{store.name}}</a> / Gifts
+</div>
+
+
+<div class = "user-container">
+<div>
+<img src = "https://placehold.it/300/300" alt="placeholder">
+</div>
+
+<div class = "user-info">
+<h1>{{gift.title}} </h1>
+<div>Description:{{gift.description}} </div>
+<div>Price:${{gift.price}} </div>
+<div>Came From: {{gift.cameFrom}}</div>
+<a class = "button warning" href="/users/{{userId}}/stores/{{store._id}}/gifts/{{gift._id}}/delete">Delete</a>
+</div>
+</div>

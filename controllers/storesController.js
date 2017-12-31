@@ -34,22 +34,10 @@ router.get('/new', (req, res) => {
 router.post('/', (req, res) => {
 
     const userId = req.params.userId
-    // const newStore = new Store({
-    //     name: req.body.name,
-    //     address: req.body.address
-
-    // })
 
     User.findById(userId)
         .then((user) => {
             user.stores.push(req.body)
-
-            // if (Array.isArray(user.stores)) {
-            //     user.stores.push(req.body);
-            // } else {
-            //     user.stores = [req.body];
-
-            // }
             return user.save()
         })
         .then(() => {
@@ -79,8 +67,24 @@ router.get('/:storeId', (req, res) => {
             console.log(error)
         })
 })
+//delete the stores
 
+router.get('/:storeId/delete',(req,res)=>{
+    const userId = req.params.userId
+    const storeId = req.params.storeId
 
+    User.findById(userId)
+    .then((user)=>{
+        user.stores.id(storeId).remove()
+        return user.save()
+    })
+    .then(()=>{
+        res.redirect(`/users/${userId}/stores/`)
+    })
+    .catch((error)=>{
+        console.log(error)
+    })
+})
 
 
 

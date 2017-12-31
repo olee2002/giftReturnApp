@@ -9,18 +9,11 @@ const GiftSchema = new Schema(
             type: String,
             required: true
         },
-        description: {
-            type: String
-        },
-        price: {
-            type: Number
-        },
-        cameFrom: {
-            type: String
-        }
+        description:String,
+        price: Number,
+        cameFrom: String
 
-    },
-    {usePushEach: true}
+    },{usePushEach: true}
 )
 
 const StoreSchema = new Schema(
@@ -29,13 +22,9 @@ const StoreSchema = new Schema(
             type: String,
             required:true
         },
-        address: {
-            type: String
-        },
+        address:String,
         giftstoReturn: [GiftSchema]
-    },
-    
-    {usePushEach: true}
+    },{usePushEach: true}
 )
 
 const UserSchema = new Schema(
@@ -44,9 +33,7 @@ const UserSchema = new Schema(
             type:String,
             required: true
         },
-        email: {
-            type:String
-        },
+        email: String,
         firstName:{
             type: String,
             required: true
@@ -59,9 +46,9 @@ const UserSchema = new Schema(
             type: String,
             default: 'http://www.fillmurray.com/300/300'
         },
+        stores:[StoreSchema]
         
-    },
-    {usePushEach: true}
+    },{usePushEach: true}
 
 )
 

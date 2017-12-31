@@ -22,12 +22,44 @@ router.get('/', (req, res) => {
 //add a new store page
 router.get('/new', (req, res) => {
     const userId = req.params.userId
+
     res.render('stores/new', {
         userId,
         pageTitle: 'New_Store'
     })
 
 })
+
+//post new store page
+router.post('/', (req, res) => {
+
+    const userId = req.params.userId
+    // const newStore = new Store({
+    //     name: req.body.name,
+    //     address: req.body.address
+
+    // })
+
+    User.findById(userId)
+        .then((user) => {
+            user.stores.push(req.body)
+
+            // if (Array.isArray(user.stores)) {
+            //     user.stores.push(req.body);
+            // } else {
+            //     user.stores = [req.body];
+
+            // }
+            return user.save()
+        })
+        .then(() => {
+            res.redirect(`/users/${userId}/stores`)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+})
+
 //show created store page
 router.get('/:storeId', (req, res) => {
     const userId = req.params.userId
@@ -35,6 +67,7 @@ router.get('/:storeId', (req, res) => {
 
     User.findById(userId)
         .then((user) => {
+            console.log(user.stores)
             const store = user.stores.storeId
             res.render('stores/show', {
                 userId,
@@ -46,23 +79,6 @@ router.get('/:storeId', (req, res) => {
             console.log(error)
         })
 })
-//post new store page
-router.post('/', (req, res) => {
-    const userId = req.params.userId
-
-    User.findById(userId)
-        .then((user) => {
-            user.stores.push(req.body);
-            return user.save()
-        })
-        .then(() => {
-            res.redirect(`/users/${userId}/stores`)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-})
-
 
 
 

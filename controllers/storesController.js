@@ -56,7 +56,7 @@ router.get('/:storeId', (req, res) => {
     User.findById(userId)
         .then((user) => {
             console.log(user.stores)
-            const store = user.stores.storeId
+            const store = user.stores.id(storeId)
             res.render('stores/show', {
                 userId,
                 store,

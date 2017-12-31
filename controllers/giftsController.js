@@ -1,19 +1,17 @@
 const express = require('express')
 const router = express.Router({ mergeParams: true })
-//require database
+
 const User = require('../db/models/User')
-const Store = require('../db/models/Store')
-const Gift = require('../db/models/Gift')
 
-
-router.get('/new', (req, res) => {
-    const userId = req.params.userId
-    const storeId = req.params.storeId
+router.get('/new', (request, response) => {
+    const userId = request.params.userId
+    const storeId = request.params.storeId
 
     User.findById(userId)
         .then((user) => {
-            const store = user.stores.storeId
-            res.render('gifts/new', {
+            const store = user.stores.id(storeId)
+
+            response.render('gifts/new', {
                 userId,
                 store,
                 pageTitle: 'New_Gift'
@@ -21,26 +19,64 @@ router.get('/new', (req, res) => {
         })
 })
 
-router.post('/',(req,res)=>{
-    const userId = req.params.userId
-    const storeId = req.params.storeId
+router.post('/', (request, response) => {
+    const userId = request.params.userId
+    const storeId = request.params.storeId
 
-    const newGift = req.body
+    const newGift = request.body
 
     User.findById(userId)
-    .then((user)=>{
-        const store = user.stores.storeId
-        store.giftToReturn.push(newGift)
+        .then((user) => {
+            const store = user.stores.id(storeId)
+            store.giftsToReturn.push(newGift)
 
-        return user.save()
-    })
-    .then(()=>{
-        res.redirect(`/users/${userId}/stores/${storeId}`)
-        
-    })
+            return user.save()
+        })
+        .then(() => {
+            response.redirect(`/users/${userId}/stores/${storeId}`)
+        })
 })
 
+router.get('/:giftId', (request, response) => {
+    const userId = request.params.userId
+    const storeId = request.params.storeId
+    const giftId = request.params.giftId
 
+    User.findById(userId)
+        .then((user) => {
+            const store = user.stores.id(storeId)
+            const gift = store.giftsToReturn.id(giftId)
 
+            response.render('gifts/show', {
+                userId,
+                store,
+                gift,
+                pageTitle: 'Gifts'
+            })
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+})
+
+router.get('/:giftId/delete', (request, response) => {
+    const userId = request.params.userId
+    const storeId = request.params.storeId
+    const giftId = request.params.giftId
+
+    User.findById(userId)
+        .then((user) => {
+            const store = user.stores.id(storeId)
+            store.giftsToReturn.id(giftId).remove()
+
+            return user.save()
+        })
+        .then(() => {
+            response.redirect(`/users/${userId}/stores/${storeId}`)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+})
 
 module.exports = router

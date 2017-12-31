@@ -37,8 +37,10 @@ app.use(express.static(`${__dirname}/public`))
 //controllers
 const userController = require('./controllers/userController')
 app.use('/users', userController)
-const storeController = require('./controllers/storesController')
-app.use('/users/:userId/stores', storeController)
+const storesController = require('./controllers/storesController')
+app.use('/users/:userId/stores', storesController)
+const giftsController = require('./controllers/giftsController')
+app.use('/users/:userId/stores/:storeId/gifts', giftsController)
 //Redirect the main port to user page.
 app.get('/', (req, res) => {
     res.redirect('/users')

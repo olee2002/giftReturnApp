@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 mongoose.Promise = global.Promise
 
+
 const GiftSchema = new Schema(
     {
         title: {
@@ -16,39 +17,40 @@ const GiftSchema = new Schema(
     },{usePushEach: true}
 )
 
+
 const StoreSchema = new Schema(
     {
         name: {
             type: String,
-            required:true
+            required: true
         },
-        address:String,
-        giftstoReturn: [GiftSchema]
-    },{usePushEach: true}
+        address: String,
+        giftsToReturn: [GiftSchema]
+    }, { usePushEach: true }
 )
 
 const UserSchema = new Schema(
     {
-        username:{
-            type:String,
+        username: {
+            type: String,
             required: true
         },
         email: String,
-        firstName:{
+        firstName: {
             type: String,
             required: true
         },
-        lastName:{
+        lastName: {
             type: String,
             required: true
         },
-        photoUrl:{
+        photoUrl: {
             type: String,
             default: 'http://www.fillmurray.com/300/300'
         },
-        stores:[StoreSchema]
-        
-    },{usePushEach: true}
+        stores: [StoreSchema]
+
+    }, { usePushEach: true }
 
 )
 
